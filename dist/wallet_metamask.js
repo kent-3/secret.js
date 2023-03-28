@@ -49,17 +49,25 @@ class MetaMaskWallet {
             // use localStorage to cache the publicKey to prevent signing request on every MetaMaskWallet.create()
             // if MetaMask is used we assume that there's localStorage in the environment
             const localStorageKey = `secretjs_${ethAddress}_pubkey`;
-            const publicKeyHex = localStorage.getItem(localStorageKey);
-            if (publicKeyHex) {
-                // verify that ethAddress can be derived from publicKeyHex
-                // this prevents reading wrong/corrupted data from localStorage
-                const ethAddressBytes = ethAddress.slice(2).toLocaleLowerCase();
-                const derivedEthAddressBytes = (0, _1.toHex)((0, sha3_1.keccak_256)(decompressSecp256k1PublicKey(publicKeyHex).slice(1)).slice(-20)).toLocaleLowerCase();
-                if (derivedEthAddressBytes === ethAddressBytes) {
-                    return new MetaMaskWallet(ethProvider, ethAddress, (0, _1.fromHex)(publicKeyHex));
-                }
-                localStorage.removeItem(localStorageKey);
-            }
+            // const publicKeyHex = localStorage.getItem(localStorageKey);
+            // if (publicKeyHex) {
+            //   // verify that ethAddress can be derived from publicKeyHex
+            //   // this prevents reading wrong/corrupted data from localStorage
+            //   const ethAddressBytes = ethAddress.slice(2).toLocaleLowerCase();
+            //   const derivedEthAddressBytes = toHex(
+            //     keccak_256(decompressSecp256k1PublicKey(publicKeyHex).slice(1)).slice(
+            //       -20,
+            //     ),
+            //   ).toLocaleLowerCase();
+            //   if (derivedEthAddressBytes === ethAddressBytes) {
+            //     return new MetaMaskWallet(
+            //       ethProvider,
+            //       ethAddress,
+            //       fromHex(publicKeyHex),
+            //     );
+            //   }
+            //   localStorage.removeItem(localStorageKey);
+            // }
             // On ETHland pubkeys are recovered from signatures, so we're going to:
             // 1. sign something
             // 2. recover the pubkey from the signature
@@ -80,7 +88,7 @@ class MetaMaskWallet {
             const eip191MessagePrefix = (0, _1.toUtf8)("\x19Ethereum Signed Message:\n");
             const rawMsgLength = (0, _1.toUtf8)(String(rawMsg.length));
             const publicKey = secp256k1.recoverPublicKey((0, sha3_1.keccak_256)(new Uint8Array([...eip191MessagePrefix, ...rawMsgLength, ...rawMsg])), sig, recoveryId, true);
-            localStorage.setItem(localStorageKey, (0, _1.toHex)(publicKey));
+            // localStorage.setItem(localStorageKey, toHex(publicKey));
             return new MetaMaskWallet(ethProvider, ethAddress, publicKey);
         });
     }

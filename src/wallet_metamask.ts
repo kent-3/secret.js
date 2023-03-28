@@ -32,29 +32,29 @@ export class MetaMaskWallet {
     // use localStorage to cache the publicKey to prevent signing request on every MetaMaskWallet.create()
     // if MetaMask is used we assume that there's localStorage in the environment
     const localStorageKey = `secretjs_${ethAddress}_pubkey`;
-    const publicKeyHex = localStorage.getItem(localStorageKey);
+    // const publicKeyHex = localStorage.getItem(localStorageKey);
 
-    if (publicKeyHex) {
-      // verify that ethAddress can be derived from publicKeyHex
-      // this prevents reading wrong/corrupted data from localStorage
+    // if (publicKeyHex) {
+    //   // verify that ethAddress can be derived from publicKeyHex
+    //   // this prevents reading wrong/corrupted data from localStorage
 
-      const ethAddressBytes = ethAddress.slice(2).toLocaleLowerCase();
-      const derivedEthAddressBytes = toHex(
-        keccak_256(decompressSecp256k1PublicKey(publicKeyHex).slice(1)).slice(
-          -20,
-        ),
-      ).toLocaleLowerCase();
+    //   const ethAddressBytes = ethAddress.slice(2).toLocaleLowerCase();
+    //   const derivedEthAddressBytes = toHex(
+    //     keccak_256(decompressSecp256k1PublicKey(publicKeyHex).slice(1)).slice(
+    //       -20,
+    //     ),
+    //   ).toLocaleLowerCase();
 
-      if (derivedEthAddressBytes === ethAddressBytes) {
-        return new MetaMaskWallet(
-          ethProvider,
-          ethAddress,
-          fromHex(publicKeyHex),
-        );
-      }
+    //   if (derivedEthAddressBytes === ethAddressBytes) {
+    //     return new MetaMaskWallet(
+    //       ethProvider,
+    //       ethAddress,
+    //       fromHex(publicKeyHex),
+    //     );
+    //   }
 
-      localStorage.removeItem(localStorageKey);
-    }
+    //   localStorage.removeItem(localStorageKey);
+    // }
 
     // On ETHland pubkeys are recovered from signatures, so we're going to:
     // 1. sign something
@@ -90,7 +90,7 @@ export class MetaMaskWallet {
       true,
     );
 
-    localStorage.setItem(localStorageKey, toHex(publicKey));
+    // localStorage.setItem(localStorageKey, toHex(publicKey));
 
     return new MetaMaskWallet(ethProvider, ethAddress, publicKey);
   }
