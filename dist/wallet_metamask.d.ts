@@ -8,7 +8,7 @@ export declare class MetaMaskWallet {
     publicKey: Uint8Array;
     /** The account's secret address, derived from `publicKey` */
     readonly address: string;
-    private constructor();
+    constructor(ethProvider: any, ethAddress: string, publicKey: Uint8Array);
     static create(ethProvider: any, ethAddress: string): Promise<MetaMaskWallet>;
     getAccounts(): Promise<readonly AccountData[]>;
     getSignMode(): Promise<import("./protobuf/cosmos/tx/signing/v1beta1/signing").SignMode>;

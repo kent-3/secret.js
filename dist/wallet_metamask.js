@@ -43,6 +43,7 @@ class MetaMaskWallet {
         this.publicKey = publicKey;
         this.address = (0, _1.pubkeyToAddress)(this.publicKey);
     }
+    // we can bypass this step with Snap because we have access to the public key
     static create(ethProvider, ethAddress) {
         return __awaiter(this, void 0, void 0, function* () {
             // use localStorage to cache the publicKey to prevent signing request on every MetaMaskWallet.create()

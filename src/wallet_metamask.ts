@@ -16,7 +16,7 @@ export class MetaMaskWallet {
   /** The account's secret address, derived from `publicKey` */
   public readonly address: string;
 
-  private constructor(
+  constructor(
     public ethProvider: any,
     public ethAddress: string,
     public publicKey: Uint8Array,
@@ -24,6 +24,7 @@ export class MetaMaskWallet {
     this.address = pubkeyToAddress(this.publicKey);
   }
 
+  // we can bypass this step with Snap because we have access to the public key
   static async create(
     ethProvider: any,
     ethAddress: string,
