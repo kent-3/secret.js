@@ -1,5 +1,5 @@
-import fetch from "cross-fetch";
-global.fetch = fetch;
+// import fetch from "cross-fetch";
+// global.fetch = fetch;
 
 import {
   fromBase64,
