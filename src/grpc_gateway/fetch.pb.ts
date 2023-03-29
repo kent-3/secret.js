@@ -3,7 +3,7 @@
 /*
 * This file is a generated Typescript file for GRPC Gateway, DO NOT MODIFY
 */
-import url from 'url'
+import 'url-search-params-polyfill'
 /**
  * base64 encoder and decoder
  * Copied and adapted from https://github.com/protobufjs/protobuf.js/blob/master/lib/base64/index.js
@@ -343,6 +343,6 @@ export function renderURLSearchParams<T extends RequestPayload>(
 
   // react-native's URLSearchParams doesn't like working with array of arrays
   return urlSearchParams
-    .map((x) => new url.URLSearchParams({ [x[0]]: x[1] }).toString())
+    .map((x) => new URLSearchParams({ [x[0]]: x[1] }).toString())
     .join("&");
 }

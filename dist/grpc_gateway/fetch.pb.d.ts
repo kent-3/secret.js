@@ -1,3 +1,4 @@
+import 'url-search-params-polyfill';
 export declare function b64Encode(buffer: Uint8Array, start: number, end: number): string;
 export declare function b64Decode(s: string): Uint8Array;
 export interface InitReq extends RequestInit {
