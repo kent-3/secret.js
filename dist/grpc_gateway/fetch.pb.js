@@ -1,9 +1,4 @@
 "use strict";
-/* eslint-disable */
-// @ts-nocheck
-/*
-* This file is a generated Typescript file for GRPC Gateway, DO NOT MODIFY
-*/
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -24,8 +19,17 @@ var __rest = (this && this.__rest) || function (s, e) {
         }
     return t;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.renderURLSearchParams = exports.fetchStreamingRequest = exports.fetchReq = exports.replacer = exports.b64Decode = exports.b64Encode = void 0;
+/* eslint-disable */
+// @ts-nocheck
+/*
+* This file is a generated Typescript file for GRPC Gateway, DO NOT MODIFY
+*/
+const url_1 = __importDefault(require("url"));
 /**
  * base64 encoder and decoder
  * Copied and adapted from https://github.com/protobufjs/protobuf.js/blob/master/lib/base64/index.js
@@ -305,7 +309,7 @@ function renderURLSearchParams(requestPayload, urlPathParams = []) {
     }, []);
     // react-native's URLSearchParams doesn't like working with array of arrays
     return urlSearchParams
-        .map((x) => new URLSearchParams({ [x[0]]: x[1] }).toString())
+        .map((x) => new url_1.default.URLSearchParams({ [x[0]]: x[1] }).toString())
         .join("&");
 }
 exports.renderURLSearchParams = renderURLSearchParams;
